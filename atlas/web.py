@@ -73,4 +73,11 @@ tpl = open(os.path.join(HERE, "web_template.html")).read()
 css = open(os.path.join(HERE, "leaflet.css")).read()
 html = tpl.replace("/*LEAFLET_CSS*/", css).replace("/*DATA*/", "window.ATLAS=" + json.dumps(DATA, separators=(",", ":")) + ";").replace("/*TEXT*/", "window.TEXT=" + json.dumps({"facts": facts, "gaps": gaps, "boats": boats_md}) + ";")
 open(os.path.join(WEB, "index.html"), "w").write(html)
+# the artifact variant: the publisher wraps the page in its own document skeleton, so strip ours and keep title, metas, style and body
+import re as _re
+art = html
+for tag in ("<!doctype html>", '<html lang="en">', "<head>", "</head>", "<body>", "</body>", "</html>", '<meta charset="utf-8">', '<meta name="viewport" content="width=device-width, initial-scale=1">'):
+    art = art.replace(tag, "")
+art = art.replace("<title>Catalina Atlas</title>", '<title>Catalina Atlas</title>\n<meta name="claude:viewport-fit-sides" content="cover">')
+open(os.path.join(WEB, "artifact.html"), "w").write(art.strip() + "\n")
 print("features", len(feats), "boats", len(boats), "buildings", len(DATA["buildings"]), "html MB", round(len(html) / 1e6, 2), "towns", towns)

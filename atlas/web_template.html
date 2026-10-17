@@ -9,13 +9,13 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /*LEAFLET_CSS*/
-:root { --bg:#0a1118; --panel:#0e1821; --surface:#132130; --ink:#eef3f6; --muted:#7f94a3; --line:#24384a; --sea:#0d1b2a; --blue:#49c9ff; --red:#ff6b5c; --yellow:#ffd23f; --route:#ffb000; --green:#7fd1a0; --purple:#d6a3ff; }
-:root[data-theme="light"] { --bg:#f3f1ea; --panel:#ffffff; --surface:#ebe8df; --ink:#1d2024; --muted:#6b6f74; --line:#d8d6cd; }
-@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --bg:#f3f1ea; --panel:#ffffff; --surface:#ebe8df; --ink:#1d2024; --muted:#6b6f74; --line:#d8d6cd; } }
+:root { --bg:#0a1118; --panel:#0e1821; --surface:#132130; --ink:#eef3f6; --muted:#7f94a3; --line:#24384a; --sea:#0d1b2a; --blue:#49c9ff; --red:#ff6b5c; --yellow:#ffd23f; --route:#ffb000; --green:#7fd1a0; --purple:#d6a3ff; color-scheme: dark; }
+:root[data-theme="light"] { --bg:#f3f1ea; --panel:#ffffff; --surface:#ebe8df; --ink:#1d2024; --muted:#6b6f74; --line:#d8d6cd; color-scheme: light; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --bg:#f3f1ea; --panel:#ffffff; --surface:#ebe8df; --ink:#1d2024; --muted:#6b6f74; --line:#d8d6cd; color-scheme: light; } }
 * { box-sizing:border-box; }
 html, body { height:100%; margin:0; }
 body { background:var(--bg); color:var(--ink); font-family:"IBM Plex Mono", ui-monospace, Menlo, monospace; font-size:13px; display:flex; flex-direction:column; }
-header { display:flex; align-items:baseline; gap:14px; padding:10px 16px; border-bottom:1px solid var(--line); background:var(--panel); flex-wrap:wrap; }
+header { display:flex; align-items:baseline; gap:14px; padding-block:10px; padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); border-bottom:1px solid var(--line); background:var(--panel); flex-wrap:wrap; }
 header h1 { font-size:15px; margin:0; letter-spacing:.04em; font-weight:600; }
 header .sub { color:var(--muted); font-size:12px; }
 header .spacer { flex:1; }
@@ -25,7 +25,7 @@ main { flex:1; display:flex; min-height:0; }
 #map { flex:1; background:var(--sea); min-width:0; }
 aside { width:380px; max-width:46vw; border-left:1px solid var(--line); background:var(--panel); display:flex; flex-direction:column; min-height:0; }
 .tabs { display:flex; gap:6px; padding:10px 12px; border-bottom:1px solid var(--line); flex-wrap:wrap; }
-.panel { display:none; overflow:auto; padding:12px 14px 24px; flex:1; }
+.panel { display:none; overflow:auto; padding-block:12px 24px; padding-left:max(14px, env(safe-area-inset-left, 0px)); padding-right:max(14px, env(safe-area-inset-right, 0px)); flex:1; min-width:0; }
 .panel.on { display:block; }
 .panel h2 { font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:14px 0 6px; }
 .panel h2:first-child { margin-top:2px; }
@@ -61,7 +61,7 @@ input[type=search] { width:100%; padding:7px 9px; background:var(--surface); col
 .lbl.cove { color:#9fb8c8; font-weight:400; font-size:10px; }
 .stat { display:flex; justify-content:space-between; border-bottom:1px solid var(--line); padding:4px 0; }
 .stat span:last-child { color:var(--muted); }
-footer { padding:6px 16px; color:var(--muted); font-size:11px; border-top:1px solid var(--line); background:var(--panel); }
+footer { padding-block:6px; padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); color:var(--muted); font-size:11px; border-top:1px solid var(--line); background:var(--panel); }
 @media (max-width: 820px) { main { flex-direction:column; } aside { width:100%; max-width:none; height:46vh; border-left:none; border-top:1px solid var(--line); } }
 </style>
 </head>
@@ -69,7 +69,7 @@ footer { padding:6px 16px; color:var(--muted); font-size:11px; border-top:1px so
 <header>
   <h1>CATALINA ATLAS</h1><span class="sub">every mapped thing on the island · tsunami and fallout flags · for Escape from Catalina</span>
   <span class="spacer"></span>
-  <button id="goAvalon">Avalon</button><button id="goTwo">Two Harbors</button><button id="goIsland">Island</button><button id="theme" title="toggle theme">◐</button>
+  <button id="goAvalon">Avalon</button><button id="goTwo">Two Harbors</button><button id="goIsland">Island</button>
 </header>
 <main>
   <div id="map" role="application" aria-label="Map of Santa Catalina Island"></div>
@@ -204,7 +204,6 @@ document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click
 document.getElementById("goAvalon").addEventListener("click", () => { const t = D.towns.avalon; map.fitBounds([[-t.se[1], t.nw[0]], [-t.nw[1], t.se[0]]]); });
 document.getElementById("goTwo").addEventListener("click", () => { const t = D.towns.twoharbors; map.fitBounds([[-t.se[1], t.nw[0]], [-t.nw[1], t.se[0]]]); });
 document.getElementById("goIsland").addEventListener("click", () => map.fitBounds(bounds));
-document.getElementById("theme").addEventListener("click", () => { const r = document.documentElement; const cur = r.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"); r.setAttribute("data-theme", cur === "dark" ? "light" : "dark"); });
 function md(s) {
   const lines = s.split("\n"); let out = [], i = 0;
   const inline = t => esc(t).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/`(.+?)`/g, "<code>$1</code>").replace(/\[(.+?)\]\((https?:[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>').replace(/(^|\s)(https?:\/\/[^\s)]+)/g, '$1<a href="$2" target="_blank" rel="noopener">$2</a>');
