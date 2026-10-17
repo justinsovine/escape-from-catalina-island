@@ -1,0 +1,272 @@
+grid 3287x2374 at 10 m; land 193.7 km2
+
+TSUNAMI TRAVEL TIME
+  Port of LA to Two Harbors: 23.1 mi, max depth 913 m, wave 15.2 min, sound 1.8 min after the flash
+  Long Beach to Two Harbors: 26.1 mi, max depth 902 m, wave 21.8 min, sound 2.0 min after the flash
+  Port of LA to Avalon: 25.4 mi, max depth 873 m, wave 18.8 min, sound 2.0 min after the flash
+  Long Beach to Avalon: 27.1 mi, max depth 848 m, wave 23.2 min, sound 2.1 min after the flash
+  shelf break (depth passes 500 m) 5.0 mi out from LA, 18.1 mi from Two Harbors: a slide there arrives in 8.4 min
+
+ISTHMUS
+  run-up that joins the two harbors: 10.5 m (34 ft)
+  isthmus land below 10 m: 41 ha; below 20 m: 81 ha
+
+NEAREST HIGH GROUND (straight line)
+   30 m ground from Two Harbors town        242 m, bearing 294, run 1.3 min, walk 2.9 min
+   30 m ground from Avalon, Crescent Ave    156 m, bearing 135, run 0.9 min, walk 1.9 min
+   30 m ground from Little Harbor camp      106 m, bearing  41, run 0.6 min, walk 1.3 min
+   30 m ground from Parsons Landing         104 m, bearing 107, run 0.6 min, walk 1.2 min
+   30 m ground from Emerald Bay camp         92 m, bearing 229, run 0.5 min, walk 1.1 min
+  100 m ground from Two Harbors town        396 m, bearing 315, run 2.2 min, walk 4.7 min
+  100 m ground from Avalon, Crescent Ave    411 m, bearing 108, run 2.3 min, walk 4.9 min
+  100 m ground from Little Harbor camp      488 m, bearing  43, run 2.7 min, walk 5.8 min
+  100 m ground from Parsons Landing         500 m, bearing 254, run 2.8 min, walk 6.0 min
+  100 m ground from Emerald Bay camp        210 m, bearing 205, run 1.2 min, walk 2.5 min
+
+CGS TSUNAMI HAZARD AREA (the state's evacuation planning line) VS THE ELEVATION BANDS
+  hazard area on the island: 2.8 km2 of land; height p50 4.1 m, p90 9.3 m, p99 18.9 m, max 36.1 m
+  hazard area joins the two harbors across the isthmus: False
+  Two Harbors: 166 buildings within 1200 m; below 10 m 73, below 20 m 121, below 30 m 139; inside the hazard area 72
+  Avalon: 1191 buildings within 2200 m; below 10 m 498, below 20 m 669, below 30 m 825; inside the hazard area 555
+
+SHELTER / RESOURCE CANDIDATES IN OSM (height, name, tags)
+    611 m  KRPA-TV (Rancho Palos Verdes )         man_made=tower                                 -118.4010,33.3868
+    515 m                                         man_made=storage_tank                          -118.4108,33.3855
+    491 m                                         amenity=shelter                                -118.3688,33.3241
+    485 m  Hanger                                 aeroway=hangar, building=hangar                -118.4150,33.4021
+    485 m                                         man_made=storage_tank                          -118.4152,33.4019
+    485 m                                         man_made=storage_tank                          -118.4152,33.4020
+    484 m  Catalina Airport Parking               amenity=parking                                -118.4154,33.4029
+    483 m  Airport Road                                                                          -118.4148,33.4024
+    483 m  Catalina Airport Bus Stop                                                             -118.4149,33.4030
+    482 m  Catalina Airport                       aeroway=aerodrome                              -118.4150,33.4049
+    475 m  Black Jack Volunteer Camp              tourism=camp_site                              -118.4080,33.3862
+    457 m  Black Jack Campground                  tourism=camp_site                              -118.4062,33.3855
+    449 m                                         amenity=shelter                                -118.3666,33.3602
+    447 m  Airport Road                                                                          -118.3653,33.3587
+    446 m  Airport Road                                                                          -118.3668,33.3598
+    446 m                                         man_made=storage_tank                          -118.3721,33.3619
+    442 m  Airport Road                                                                          -118.3521,33.3545
+    440 m  Airport Road                                                                          -118.3675,33.3601
+    437 m  Airport Road                                                                          -118.3632,33.3562
+    437 m  Airport Road                                                                          -118.3511,33.3544
+    437 m                                         amenity=shelter                                -118.4183,33.4071
+    436 m  Buffalo Springs Reservoirs             natural=water                                  -118.4179,33.4069
+    433 m  Wrigley Reservoir                      man_made=reservoir_covered, natural=water      -118.3523,33.3534
+    433 m  Wrigley Reservoir 104-026 Dam                                                         -118.3519,33.3534
+    429 m  Airport Road                                                                          -118.3716,33.3637
+    421 m                                         amenity=shelter                                -118.3859,33.3743
+    421 m  Airport Road                                                                          -118.3558,33.3543
+    420 m  Buffalo Springs Reservoirs             natural=water                                  -118.4206,33.4058
+    416 m  Patrick Reservoir Trail                                                               -118.3635,33.3504
+    415 m                                         amenity=shelter, building=yes                  -118.3749,33.3658
+    415 m  Patrick Reservoir                      natural=water                                  -118.3648,33.3498
+    411 m  Airport Road                                                                          -118.3750,33.3679
+    409 m  Airport Road                                                                          -118.3600,33.3546
+    407 m  Airport Road                                                                          -118.3607,33.3556
+    405 m  Haypress Reservoir                     natural=water                                  -118.3611,33.3531
+    403 m  Airport Road                                                                          -118.3947,33.3873
+    398 m  Laura Stein Volunteer Camp             tourism=camp_site                              -118.3600,33.3574
+    397 m  Pump                                   building=yes                                   -118.3494,33.3506
+    387 m                                         historic=ruins                                 -118.4240,33.4045
+    374 m  Upper Cape Reservoir Road                                                             -118.3934,33.3800
+    366 m                                         amenity=shelter                                -118.4801,33.4176
+    356 m  Upper Cape Reservoir Road                                                             -118.4012,33.3758
+    345 m  Middle Ranch Road                                                                     -118.4003,33.3550
+    331 m  Upper Cape Reservoir Road                                                             -118.3936,33.3778
+    329 m  Cape Canyon Reservoir                  natural=water                                  -118.3930,33.3777
+    318 m  Empire Quarry Trail                                                                   -118.4433,33.4159
+    313 m  Bullrush Reservoirs                    natural=water                                  -118.4180,33.3387
+    313 m  Marble Quarry Road                                                                    -118.4487,33.4195
+    303 m  Howland's Water Tank Road                                                             -118.5244,33.4495
+    302 m  Lower Bullrush Reservoir               natural=water                                  -118.4216,33.3398
+    299 m  El Rancho Escondido Road                                                              -118.4343,33.3951
+    294 m  Big Springs Reservoir                  natural=water                                  -118.4621,33.4333
+    260 m                                         man_made=reservoir_covered                     -118.4337,33.3571
+    257 m  Renton Mine                                                                           -118.3140,33.3231
+    256 m  Renton Mine Rod                                                                       -118.3162,33.3249
+    230 m  Camp Cactus                            tourism=camp_site                              -118.4677,33.3546
+    220 m  Catalina Island Conservancy            amenity=toilets                                -118.4358,33.3564
+    220 m  Catalina Island Conservancy            building=yes, office=yes                       -118.4359,33.3564
+    210 m  James H. Ackerman Native Plant Nursery building=warehouse                             -118.4374,33.3558
+    206 m                                         landuse=reservoir                              -118.4552,33.3833
+    205 m  Middle Ranch                                                                          -118.4383,33.3553
+    203 m  Thompson Reservoir                     natural=water                                  -118.4412,33.3537
+    199 m  Middle Ranch Road                                                                     -118.4398,33.3556
+    198 m  Renton Mine Road                                                                      -118.3177,33.3319
+    190 m  Upper Buffalo Corral Reservoir         natural=water                                  -118.4691,33.4271
+    176 m  Middle Ranch Road                                                                     -118.4488,33.3570
+    175 m  Middle Ranch Road                                                                     -118.4453,33.3565
+    164 m  Camp Cactus Road                                                                      -118.4652,33.3559
+    163 m  Camp Cactus Road                                                                      -118.4607,33.3607
+    161 m                                         amenity=shelter                                -118.4589,33.4007
+    161 m  Lower Buffalo Corral Reservoir         natural=water                                  -118.4721,33.4134
+    160 m  Summit Reservoir                       natural=water                                  -118.4820,33.4381
+    152 m  Wrigley Ranch                          building=farm_auxiliary                        -118.4517,33.3858
+    150 m  El Rancho Escondido                                                                   -118.4507,33.3860
+    134 m  Middle Ranch Road                                                                     -118.4559,33.3590
+    132 m  Quarry Haul Road                                                                      -118.4463,33.4243
+    131 m  Half Way Water Tank                    man_made=storage_tank, building=yes            -118.3161,33.3380
+    118 m                                         man_made=reservoir_covered                     -118.5215,33.4585
+    117 m  Middle Ranch Road                                                                     -118.4691,33.3687
+    116 m  Mount Ada Water Tank                   man_made=storage_tank, building=yes            -118.3205,33.3390
+    110 m                                         man_made=storage_tank                          -118.3338,33.3422
+    110 m                                         man_made=reservoir_covered                     -118.4860,33.4412
+    105 m                                         power=substation                               -118.4925,33.4367
+    104 m  Deep Tank Reservoir                    natural=water                                  -118.4509,33.4257
+    103 m                                         man_made=storage_tank, building=yes            -118.3376,33.3411
+    102 m                                         man_made=storage_tank, building=yes            -118.3375,33.3411
+    102 m                                         man_made=storage_tank, building=yes            -118.3374,33.3412
+    100 m                                         man_made=storage_tank                          -118.3517,33.3658
+     97 m  Middle Ranch Road                                                                     -118.4602,33.3627
+     87 m                                         man_made=storage_tank                          -118.3810,33.3882
+     86 m  Group Area                             tourism=camp_site                              -118.3393,33.3286
+     85 m  Hermit Gulch Campground                tourism=camp_site                              -118.3392,33.3288
+     82 m                                         man_made=storage_tank, building=yes            -118.3096,33.3307
+     81 m  Ranger House                           building=yes                                   -118.3386,33.3295
+     81 m  Middle Ranch Road                                                                     -118.4776,33.3795
+     79 m  Ranger Station                         building=yes                                   -118.3384,33.3292
+     79 m                                         man_made=storage_tank                          -118.3739,33.4060
+     76 m                                         man_made=reservoir_covered                     -118.5013,33.4443
+     74 m                                         man_made=reservoir_covered                     -118.5012,33.4444
+     71 m                                         man_made=reservoir_covered                     -118.3563,33.3721
+     68 m                                         man_made=reservoir_covered                     -118.3564,33.3721
+     63 m                                         man_made=storage_tank                          -118.3733,33.4063
+     60 m                                         man_made=storage_tank                          -118.3734,33.4063
+     58 m  Fire Station 55                        amenity=fire_station                           -118.3357,33.3332
+     54 m                                         man_made=reservoir_covered                     -118.5342,33.4668
+     52 m                                         man_made=storage_tank, building=yes            -118.3087,33.3292
+     52 m                                         man_made=storage_tank                          -118.5131,33.4503
+     50 m  Harbor Department                      landuse=industrial                             -118.3352,33.3401
+     44 m  Preschool Learning For Avalon Youth    amenity=kindergarten                           -118.3330,33.3352
+     44 m  32                                     tourism=camp_site                              -118.4921,33.4395
+     43 m                                         man_made=storage_tank                          -118.3728,33.4067
+     42 m  31                                     tourism=camp_site                              -118.4922,33.4397
+     38 m  Campus by the Sea                      leisure=camp_site                              -118.3491,33.3692
+     35 m  Ranger Station                         building=yes                                   -118.4915,33.4399
+     35 m  Ranger House                           building=yes                                   -118.4914,33.4399
+     33 m  Campground Road                                                                       -118.4917,33.4399
+     33 m                                         man_made=storage_tank                          -118.3494,33.3669
+     33 m                                         man_made=storage_tank                          -118.3494,33.3669
+     32 m                                         building=school                                -118.3582,33.3734
+     32 m                                         man_made=storage_tank                          -118.3698,33.4034
+     32 m                                         building=school                                -118.3581,33.3734
+     31 m  Avalon K-12 School                     amenity=school                                 -118.3324,33.3387
+     28 m  Middle Ranch Road                                                                     -118.4760,33.3761
+     27 m                                         building=school                                -118.3580,33.3725
+     27 m  Perdition Caves                        tourism=attraction                             -118.4768,33.4467
+     26 m  Children's Dental Health Clinic        amenity=dentist, building=yes                  -118.3314,33.3387
+     25 m                                         building=school                                -118.3567,33.3746
+     24 m                                         building=school                                -118.3575,33.3733
+     24 m  Quarry Access Road                                                                    -118.3049,33.3168
+     23 m                                         building=school                                -118.3576,33.3730
+     23 m                                         building=school                                -118.3573,33.3734
+     23 m  Catalina Island Medical Center         amenity=hospital                               -118.3307,33.3392
+     23 m                                         building=hospital                              -118.3307,33.3393
+     23 m  Stone Quarry                           man_made=mine                                  -118.4663,33.4400
+     23 m                                         building=hospital                              -118.3308,33.3392
+     22 m                                         building=school                                -118.3564,33.3746
+     22 m                                         building=school                                -118.3573,33.3732
+     20 m                                         building=school                                -118.3572,33.3734
+     20 m                                         building=school                                -118.3564,33.3743
+     19 m  Wastewater Treatment Facility          man_made=wastewater_plant                      -118.3104,33.3323
+     18 m                                         man_made=reservoir_covered, building=yes       -118.5085,33.4511
+     18 m                                         building=school                                -118.3569,33.3736
+     18 m  Blue Cavern Point                      natural=peak                                   -118.4776,33.4481
+     17 m                                         building=school                                -118.3568,33.3737
+     16 m                                         building=school                                -118.3545,33.3729
+     16 m                                         building=school                                -118.3545,33.3730
+     16 m                                         building=school                                -118.3561,33.3732
+     15 m                                         man_made=storage_tank, building=yes            -118.3096,33.3325
+     15 m                                         building=school                                -118.3561,33.3739
+     14 m                                         building=school                                -118.3561,33.3739
+     14 m  Spouting Caves                         tourism=attraction                             -118.4758,33.4445
+     14 m                                         man_made=storage_tank                          -118.3560,33.3735
+     14 m  Avalon Fire Department                 amenity=fire_station                           -118.3291,33.3395
+     14 m                                         building=school                                -118.3558,33.3734
+     13 m  Shark Harbor Campground                tourism=camp_site                              -118.4724,33.3835
+     12 m  Bahia Azul Group Campsite              tourism=camp_site                              -118.4932,33.4409
+     12 m                                         building=school                                -118.3551,33.3735
+     11 m                                         building=school                                -118.3553,33.3736
+     11 m                                         building=school                                -118.3551,33.3736
+     11 m                                         building=school                                -118.3547,33.3736
+     10 m                                         building=school                                -118.3547,33.3737
+     10 m                                         landuse=industrial, power=plant                -118.3096,33.3329
+      9 m                                         man_made=storage_tank, building=yes            -118.3098,33.3330
+      9 m                                         man_made=storage_tank, building=yes            -118.3096,33.3330
+      9 m  Lava Wall                              tourism=camp_site                              -118.4220,33.4267
+      8 m                                         power=substation, building=yes                 -118.3275,33.3463
+      8 m  Singing Waters Christian Center        building=church                                -118.3276,33.3406
+      7 m  Little Harbor Campground Road                                                         -118.4719,33.3862
+      7 m                                         power=generator                                -118.3103,33.3334
+      7 m  Catalina Island Conservancy            building=commercial                            -118.3235,33.3427
+      6 m                                         power=generator                                -118.3105,33.3334
+      6 m  Pebbly Beach Generating Station        landuse=industrial, power=plant                -118.3101,33.3333
+      6 m                                         power=generator                                -118.3104,33.3339
+      6 m  Catalina Lodge                         building=hotel, tourism=hotel                  -118.3275,33.3426
+      6 m                                         power=generator                                -118.3105,33.3339
+      6 m                                         power=generator                                -118.3107,33.3338
+      6 m                                         power=generator                                -118.3106,33.3339
+      6 m                                         building=school                                -118.3536,33.3740
+      6 m                                         building=school                                -118.3545,33.3746
+      6 m  Camp Cherry Valley                     tourism=camp_site                              -118.5063,33.4508
+      5 m  2                                      tourism=camp_site                              -118.4924,33.4417
+      5 m  USC Wrigley Institute for Environmenta office=educational_institution                 -118.4834,33.4448
+      5 m  Ben Weston Beach                       tourism=camp_site                              -118.4813,33.3676
+      5 m  USC Wrigley Institute for Environmenta aeroway=helipad                                -118.4836,33.4448
+      5 m  Blue Water Cruising Club Hut           building=yes                                   -118.5183,33.4588
+      4 m  Ranger Station                         building=yes                                   -118.4730,33.3864
+      4 m  A                                      tourism=camp_site                              -118.4729,33.3834
+      4 m  L.A. County Sheriffs Department        amenity=police                                 -118.3271,33.3431
+      4 m  Cottonwood Beach                       tourism=camp_site                              -118.4787,33.3762
+      4 m  6                                      tourism=camp_site                              -118.4920,33.4415
+      4 m  Avalon Freight Services, LLC           building=warehouse                             -118.3125,33.3374
+      4 m                                         building=hospital                              -118.5322,33.4692
+      4 m  Helispot 55A                           aeroway=helipad                                -118.3115,33.3367
+      4 m  Catalina Airport Shuttle Bus                                                          -118.3263,33.3425
+      4 m  Hotel Atwater                          tourism=hotel                                  -118.3267,33.3435
+      4 m  Little Harbor Campground               tourism=camp_site                              -118.4730,33.3869
+      4 m  C                                      tourism=camp_site                              -118.4728,33.3831
+      4 m  Two Harbors Amphibious Terminal Seapla aeroway=aerodrome                              -118.5086,33.4326
+      4 m  5                                      tourism=camp_site                              -118.4919,33.4416
+      4 m  1                                      tourism=camp_site                              -118.4925,33.4416
+      4 m  Catalina Island Conservancy            building=commercial, office=association        -118.3252,33.3424
+      4 m  Bluewater Avalon                       amenity=restaurant                             -118.3261,33.3443
+      4 m  B                                      tourism=camp_site                              -118.4728,33.3833
+      4 m  Pebbly Beach Seaplane Base             aeroway=aerodrome                              -118.3114,33.3368
+      3 m  The Edgewater                          building=hotel, tourism=hotel                  -118.3258,33.3434
+      3 m  Camp Emerald Bay                       leisure=summer_camp                            -118.5318,33.4692
+      3 m  Brisa Del Mar Group Campground         tourism=camp_site                              -118.4917,33.4416
+      3 m  Long Point Beach                       tourism=camp_site                              -118.3691,33.4072
+      2 m  3                                      tourism=camp_site                              -118.4923,33.4417
+      2 m  4                                      tourism=camp_site                              -118.4922,33.4417
+      2 m                                         amenity=shelter, building=roof                 -118.3222,33.3441
+      2 m  Paradise Cove                          tourism=camp_site                              -118.4249,33.4267
+      2 m  Willow Cove                            tourism=camp_site                              -118.3562,33.3776
+      2 m  Goat Harbor                            tourism=camp_site                              -118.3949,33.4160
+      1 m  Goat Harbor                            tourism=camp_site                              -118.3970,33.4163
+      1 m  Cabrillo Beach                         tourism=camp_site                              -118.4047,33.4198
+      1 m  Italian Gardens                        tourism=camp_site                              -118.3862,33.4139
+      1 m  Italian Gardens                        tourism=camp_site                              -118.3816,33.4097
+      1 m  Italian Gardens                        tourism=camp_site                              -118.3774,33.4098
+      0 m  Rippers Cove                           tourism=camp_site                              -118.4279,33.4274
+      0 m  Ship Rock Light                        man_made=lighthouse, building=yes              -118.4917,33.4632
+     -1 m                                         tourism=camp_site                              -118.4069,33.4214
+     -1 m  Island Water Charters                                                                 -118.3245,33.3442
+     -1 m  City of Avalon Harbor Master           office=government                              -118.3244,33.3442
+     -1 m  Sherrill's Marine Services Repair Barg building=yes                                   -118.3247,33.3485
+     -1 m                                         amenity=shelter, building=roof                 -118.3223,33.3440
+     -1 m                                         amenity=shelter, building=roof                 -118.3226,33.3439
+     -1 m                                         amenity=shelter, building=roof                 -118.3221,33.3441
+     -1 m                                         amenity=shelter, building=roof                 -118.3224,33.3440
+
+ESCAPE DISTANCES (great circle, from the Catalina Harbor mouth)
+  San Clemente I. (Wilson Cove, Navy)  25.2 nm   6 kn  4.2 h   20 kn  1.3 h
+  Santa Barbara I.                    26.4 nm   6 kn  4.4 h   20 kn  1.3 h
+  Dana Point                          40.9 nm   6 kn  6.8 h   20 kn  2.0 h
+  Newport                             33.3 nm   6 kn  5.5 h   20 kn  1.7 h
+  Oceanside                           57.6 nm   6 kn  9.6 h   20 kn  2.9 h
+  San Diego, Point Loma               78.5 nm   6 kn 13.1 h   20 kn  3.9 h
+  Channel Islands Harbor, Oxnard      56.7 nm   6 kn  9.4 h   20 kn  2.8 h
+  Marina del Rey                      32.7 nm   6 kn  5.5 h   20 kn  1.6 h
+  Port of LA                          21.7 nm   6 kn  3.6 h   20 kn  1.1 h

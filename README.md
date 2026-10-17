@@ -78,3 +78,12 @@ and road crossings as mechanics. A per-section card for every shelter-to-shelter
 slab polygons to DXF and cut the model.
 
 MIT.
+
+## The game scenario
+
+`scenario/` works out Escape from Catalina from real data: wave travel times across the channel, the run-up that
+turns the isthmus into sea, how far the nearest safe ground is from the pier, what the state's own tsunami hazard
+line says, what high ground has water and buildings, and how far the boats would have to go. See
+`scenario/README.md` for the numbers and `scenario/numbers.py` / `scenario/flood_map.py` to recompute them.
+
+![isthmus](examples/isthmus_flood.png)
