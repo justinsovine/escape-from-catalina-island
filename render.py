@@ -24,6 +24,8 @@ p.add_argument("--res", type=float, help="grid metres; defaults per style (iso 2
 p.add_argument("--dem", help="local GeoTIFF to use instead of terrain tiles")
 p.add_argument("--step-ft", type=float, help="iso: feet per slab")
 p.add_argument("--focus", nargs=3, type=float, metavar=("LON", "LAT", "RADIUS_M"), help="wire: show one leg, a disc around this point")
+p.add_argument("--palette", default="mono", help="mono, night, paper; crt also ink, phosphor")
+p.add_argument("--route-color", help="override the route color (hex)")
 a = p.parse_args()
 
 res = a.res or {"iso": 20.0, "crt": 36.0, "wire": 10.0}[a.style]
@@ -39,5 +41,11 @@ else:
 if a.step_ft: S["step_ft"] = a.step_ft; S["slab_m"] = a.step_ft * 0.7
 if a.focus: S["focus"] = (*S["area"].xy(a.focus[0], a.focus[1]), a.focus[2])
 os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
+from mapgame import palette as _pal
+P = dict(_pal.get(a.palette))
+if a.route_color:
+    P["route"] = a.route_color; P["days"] = {k: a.route_color for k in P["days"]}
+    rgb = tuple(int(a.route_color.lstrip("#")[i:i + 2], 16) for i in (0, 2, 4)); P["croute"] = rgb; P["cdays"] = {k: rgb for k in P["cdays"]}
+S["palette"] = P
 STYLES[a.style](S, a.out)
 print("wrote", a.out)

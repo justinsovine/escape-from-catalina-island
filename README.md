@@ -4,19 +4,21 @@ Stylized maps of real trails, built from open data. One scene (an elevation grid
 the trail), three looks. Works for any bbox on Earth with nothing cached: terrain comes from Mapzen
 Terrarium tiles on AWS, features from the OpenStreetMap API, the trail from its OSM route relation.
 
-| `iso` stacked laser-cut slabs | `wire` contour wireframe card | `crt` 1-bit pixel map on a CRT |
+| `iso` stacked laser-cut slabs | `wire` contour card | `crt` pixel map on a CRT |
 |---|---|---|
-| ![](examples/isthmus_iso.png) | ![](examples/catalina_wire.png) | ![](examples/catalina_crt.png) |
-| ![](examples/sheltowee_iso.png) | ![](examples/sheltowee_wire.png) | ![](examples/sheltowee_crt.png) |
+| ![](examples/isthmus_iso_night.png) | ![](examples/catalina_wire_night.png) | ![](examples/catalina_crt_ink.png) |
+| ![](examples/isthmus_iso_paper.png) | ![](examples/catalina_wire_paper.png) | ![](examples/catalina_crt_phosphor.png) |
+| ![](examples/sheltowee_iso.png) | ![](examples/sheltowee_wire_night.png) | ![](examples/sheltowee_crt_ink.png) |
 
-Top row: Two Harbors, Catalina Island. Bottom row: the Sheltowee Trace through Red River Gorge, Kentucky.
+Rows: Catalina in the `night` palette, Catalina in `paper` (and the `phosphor` CRT), the Sheltowee Trace through Red
+River Gorge, Kentucky. Red is Monday over the ridge, blue Tuesday on the coast road, yellow Wednesday to Two Harbors.
 
 ## Run
 
     pip install -r requirements.txt
-    python render.py iso isthmus out/isthmus.png
-    python render.py wire catalina out/catalina.png
-    python render.py crt sheltowee out/sheltowee.png
+    python render.py iso isthmus out/isthmus.png --palette night
+    python render.py wire catalina out/catalina.png --palette paper
+    python render.py crt sheltowee out/sheltowee.png --palette ink
 
 Any place, by bbox and the trail's name in OSM:
 
@@ -24,7 +26,8 @@ Any place, by bbox and the trail's name in OSM:
 
 Options: `--zoom 14` for about 10 m terrain (13 is about 19 m), `--dem file.tif` to use a local GeoTIFF such as a
 USGS 3DEP tile instead of tiles, `--step-ft 250` for thicker slabs, `--res` for the grid size in metres,
-`--focus LON LAT RADIUS_M` to put one leg of the trail on the wire card instead of the whole bbox.
+`--focus LON LAT RADIUS_M` to put one leg of the trail on the wire card instead of the whole bbox, `--palette`
+(`mono`, `night`, `paper`; the CRT also takes `ink` and `phosphor`), `--route-color #hex` to override the route.
 Downloads are cached under `data/` (or `$MAPGAME_DATA`). Named scenes with labels and pins live in `mapgame/scenes.py`.
 
 ## How it works
@@ -40,8 +43,19 @@ Downloads are cached under `data/` (or `$MAPGAME_DATA`). Named scenes with label
 - `mapgame/styles/wire_card.py` runs marching squares at a fixed interval, projects the contours with a tilted
   camera, drapes the route, and plants pins on a compass disc.
 - `mapgame/styles/crt_map.py` draws one elevation cell per pixel at low resolution, hatches the upper part of
-  the local relief with carets, places tree glyphs on forest polygons (or along streams), dots the trails, labels in
-  Press Start 2P, then dithers the sea, adds scanlines, barrel distortion, bloom and a frame.
+  the local relief with carets, places tree glyphs on forest polygons (or along streams), dots the roads, labels in
+  Press Start 2P, then composites separate ink layers (map, water, route) onto paper and adds scanlines, barrel
+  distortion, bloom and a frame. The `mono` palette collapses it to the 1-bit original.
+- `mapgame/palette.py` holds the palettes; `mapgame/route.py` cuts the route into legs along an itinerary.
+
+## Color
+
+Every palette keeps terrain and features desaturated so the route is the only saturated thing on the page: it
+stands out by saturation and luminance, not just hue. Dark palettes add a soft glow in the route's own hue outside
+a dark casing; light palettes use a paper casing instead. A scene can carry an itinerary, `stops` in order with
+`leg_days`, and the route is cut wherever a stop lies on it; a piece whose ends sit at consecutive stops is that
+day's leg and takes that day's color. Two paths between the same two towns (a ridge and a coast road) are told
+apart by a via-point on each. Trail that exists but is not on the plan is drawn as a muted dash.
 
 ## Readability rules the styles follow
 

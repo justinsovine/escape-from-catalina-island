@@ -28,7 +28,7 @@ class Area:
         """Bilinear sample of a grid at map coords; scalar in, scalar out."""
         scalar = np.ndim(x) == 0
         r, c = self.rc(np.atleast_1d(np.asarray(x, float)), np.atleast_1d(np.asarray(y, float)))
-        v = map_coordinates(np.nan_to_num(Z, nan=0.0), [r, c], order=1)
+        v = map_coordinates(np.nan_to_num(Z, nan=0.0), [r, c], order=1, mode="nearest")
         return float(v[0]) if scalar else v
 
     @property
