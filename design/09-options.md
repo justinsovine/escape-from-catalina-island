@@ -22,10 +22,13 @@ simulation one (04); the sim can run everywhere while the map shows only belief.
 | separate survivors, same island, 2 to 4 | per player | shared, no pause, waits by consent | meeting by chance or radio, trading maps and rumors, towing each other, splitting the rescue score; faith per player | a server or lockstep; the opening is real time for everyone; a dead player waits |
 | asynchronous shared world | per player | each plays in turn | fits a web build | breaks the real-time opening and weather tape sharing |
 
-Recommendation: design for separate survivors and build solo first. The data model already keeps knowledge
-and faith per observer, the sim is deterministic from the seed and the event log, and a host-authoritative
-server replaying the same log is the simplest transport. Lockstep across engines is not worth the float
-determinism fight. Do not promise it until the solo loop is fun.
+Recommendation: design for separate survivors and build solo first. The data model keeps knowledge and
+faith per observer and the sim is deterministic from the seed and the logs. Transport is host-authoritative:
+the host runs the simulation and keeps the shared and hidden logs; a client receives per tick only state
+deltas for entities inside its perception window, its own knowledge deltas, and the cues from `perceivable`
+that reach its observer. The shared log never goes to a client, so the unreliable narrator survives a file
+browser. Lockstep across engines is not worth the float determinism fight. What makes the shape true is in 04
+(exchange, spectate) and 05 (consent expiry). Do not promise it until the solo loop is fun.
 
 ## Death (decision 45)
 
@@ -35,9 +38,9 @@ in lead mode. Cost: none in the data; one rule flag.
 ## Fallout plume: baked or runtime (decision 23)
 
 Baked: 16 sectors x 3 speed classes = 48 small rasters at 250 m (about 13 k cells each, under 1 MB total)
-and one formula at runtime. Runtime: a Gaussian plume per episode, a few hundred operations per cell per
-episode, still cheap at 250 m. Recommendation: bake, keep the runtime formula as the generator so a mod can
-change it; both produce the same deposition field schema.
+and one hourly resolution into the dose raster. Runtime: a Gaussian plume per episode, a few hundred
+operations per cell per episode, still cheap at 250 m. Recommendation: bake, keep the runtime formula as the
+generator so a mod can change it; both produce the same deposition field schema.
 
 ## EMP timing (decision 35)
 
@@ -47,8 +50,10 @@ devices and engines, already in the schema.
 
 ## Terrain in 3D (decision 4)
 
-The heightmap and the threshold raster serve both 2D and 3D. 3D adds a mesh build at load (tile the 10 m
-heightmap into chunks, 30 m for the far field) and a water plane per cove. Nothing changes in the data pack.
+The heightmap and the threshold pairs serve both 2D and 3D. 3D adds a mesh: the 30 m grid everywhere
+(0.87 M vertices) plus 10 m chunks inside a stated radius of the camera (2 km is about 125 k vertices), and a
+water plane per cove. The full 10 m grid as a mesh would be 7.8 M vertices and is never built. Nothing changes
+in the data pack.
 
 ## Deferred, with a place in the data
 

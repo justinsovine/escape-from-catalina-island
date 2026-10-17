@@ -16,9 +16,10 @@ Decisions referenced by number come from the two Q&A rounds; they are listed in 
 | knowledge | what one observer believes: seen mask, feature beliefs with error radii, edge beliefs, map items, rumors | perception and reading | every renderer |
 | view | a renderer configuration: projection, layers, minimum belief state, style | the player | the renderer |
 
-One rule makes "hide and show everything" a property of the data instead of a feature list: a renderer never
-reads truth. It reads knowledge, plus the live perception window, through one predicate
-(`visible(feature, observer, view)`) and one function (`water_level(cove, t)`).
+One rule makes "hide and show everything" a property of the data instead of a feature list: a renderer
+reads knowledge, plus the live perception window, through one predicate (`visible(feature, observer, view)`)
+and one function (`water_level(cove, t)`). Of truth it may read only the baked immutable fields (kind, name,
+geometry, tier) of features the observer already has a belief about.
 
 ## Files
 
@@ -35,6 +36,7 @@ reads truth. It reads knowledge, plus the live perception window, through one pr
 | `09-options.md` | open choices with costs and recommendations |
 | `10-review.md` | adversarial review findings and what changed because of them |
 | `decisions.md` | the Q&A decisions by number |
+| `qa/` | the questions and answers, verbatim |
 
 ## Reading order
 
@@ -43,7 +45,8 @@ systems that sit on top; 08 to build the pack; 09 and 10 for what is still open.
 
 ## What the pipeline already proves
 
-`atlas/bake.py` produces the two products the rest depends on: the flood threshold raster (one 16-bit image
-that answers "is this cell wet at level L" for every L) and the 30 m cost classes, and it checks the threshold
-raster against the earlier flood-fill result for the isthmus. `atlas/build.py`, `atlas/sources.py` and
+`atlas/bake.py` produces the products the rest depends on: per-cove flood thresholds (for every cell, the lowest
+(cove, level) pair on each coast at which the cell is wet from that cove's water, with the seabed in the sea cells)
+and the 30 m cost classes, and it checks the thresholds against the earlier flood-fill result for the isthmus.
+The review in `10-review.md` changed the water representation from one global raster to these pairs. `atlas/build.py`, `atlas/sources.py` and
 `atlas/lariac/` produce the feature inventory the pack is built from.

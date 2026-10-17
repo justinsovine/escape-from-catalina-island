@@ -11,13 +11,12 @@ belief counterpart (what an observer thinks it is). Three moments exist:
 
 | flag | scope | derivation | moment | belief counterpart |
 |---|---|---|---|---|
-| `threshold_m` | cell | spill level: lowest sea level that wets the cell through a connected path (01) | baked | known where terrain detail is 3; otherwise the observer only has elevation bands |
-| `cove` | cell | nearest cove region id | baked | the same (regions are public) |
-| `wet` | cell | `threshold_m <= water_level(cove, t)` | live | drawn only where perceived; remembered as last seen |
+| `thr_ne, cove_ne, thr_sw, cove_sw` | cell | per-cove spill levels: the lowest-threshold cove on each coast (01) | baked | known where terrain detail is 3; otherwise the observer only has elevation bands |
+| `wet` | cell | `thr_ne < water_level(cove_ne, t) or thr_sw < water_level(cove_sw, t)`; evaluated in a shader or on level-change events, never in a per-frame CPU loop | live | drawn where perceived; elsewhere from `believed_level_m(cove)` over seen cells |
 | `peak_level_m` | cove | max of `water_level` over the pulse | resolved per pulse | heard about, or inferred from debris lines |
-| `flood_depth_m` | feature | `max(0, peak_level_m(cove) - ground_elev_m)` with `threshold_m <= peak` | resolved per pulse | unknown until seen; predicted before the event from believed elevation and the official hazard line (decision 22), and the prediction may be wrong |
+| `flood_depth_m` | feature | `max(0, peak_level_m(cove_k) - ground_elev_m)` over the feature's two coast pairs with `thr < peak` | resolved per pulse | unknown until seen; predicted before the event from believed elevation and the official hazard line (decision 22), and the prediction may be wrong |
 | `tsunami_affected` | feature | `flood_depth_m > 0` at any pulse | resolved | as above |
-| `damage` | building, boat, vehicle | class by depth and construction: wet (< 0.5 m), damaged (0.5 to 2 m or wood over 1 m), destroyed (over 2 m or swept), swept (depth over height or velocity class high) | resolved | last seen condition |
+| `damage` | building, boat, vehicle | class by depth and construction: wet (< 0.5 m), damaged (0.5 to 2 m or wood over 1 m), destroyed (over 2 m or swept), swept (depth over height or velocity class high); velocity class from the cove exposure factor and distance to shore | resolved | last seen condition, within the 300 m attribute range (04) |
 | `hazard_zone` | feature | inside the state tsunami hazard polygon | baked | printed on official maps |
 | `debris` | cell | peak wet and near a damaged feature or the shore | resolved after the last pulse | seen |
 
@@ -25,8 +24,8 @@ belief counterpart (what an observer thinks it is). Three moments exist:
 
 | flag | scope | derivation | moment | belief counterpart |
 |---|---|---|---|---|
-| `deposition` | cell per episode | plume x source strength (05) | resolved per tape hour | never seen directly |
-| `dose_rate` | cell | sum of episodes with t^-1.2 decay | live | a meter reading if the party has a dosimeter or a radio report; otherwise symptoms |
+| `deposition` | cell per episode | plume x airborne mass fraction (05) | resolved per tape hour | never seen directly |
+| `dose_rate` | cell | sum of episodes with (t - t_blast)^-1.2 decay (05), resolved once per game hour into a 250 m raster; entities read their cell | resolved hourly | a meter reading if the party has a dosimeter or a radio report; otherwise symptoms |
 | `contaminated_air` | region | `dose_rate` above the shelter threshold | live | as above |
 | `shelter_pf` | building, vehicle, boat, cave, adit | construction class: wood frame 2 to 3, masonry 5 to 10, basement or earth cover 20 to 50, adit or bunker 100 plus, vehicle 1.5, boat cabin 1.5 | baked from construction and height data, hand overrides allowed | guessed from appearance; verified by staying |
 | `water_contaminated` | water source | by type and deposition history: open surface (reservoir, creek, trough) true after the first episode on its catchment; spring true after a lag; well false unless flooded; enclosed tank false unless its lid or vent failed; desal output false while the plant runs on clean intake | live, with a decay term for surface water | unknown until tested (a kit) or inferred from type |
@@ -37,7 +36,7 @@ belief counterpart (what an observer thinks it is). Three moments exist:
 | flag | scope | derivation | moment | belief counterpart |
 |---|---|---|---|---|
 | `cost_class` | cell at 30 m | slope and land cover: easy, moderate, steep, treacherous (slow, fatigue, injury roll), impassable | baked | believed from terrain detail; unknown terrain plans as moderate |
-| `passable` | graph edge | not cut by a resolved event (flood, slide, debris) | resolved | last seen |
+| `passable` | graph edge | not cut by a resolved event (flood, slide, debris) | resolved | last seen; an edge is `known` when any of its cells is seen and `verified` when all are within trail range (04) |
 | `in_view` | cell | viewshed from the observer | live on movement | this is perception itself |
 
 ## Infrastructure and resources
@@ -69,12 +68,17 @@ belief counterpart (what an observer thinks it is). Three moments exist:
 | `afloat`, `adrift`, `beached`, `sunk` | boat | wave resolution and drift steps (06) | resolved |
 | `electronic_dead` | device, engine | `electronic` and an EMP modifier fired | resolved |
 | `secret_tier` | feature | authored, 0 to 3 | baked |
-| `fictional` | feature | authored, tier 3 | baked; scenario flag `fiction` hides tier 3 entirely |
+| `fictional` | feature | authored, tier 3 | baked; with the scenario flag `fiction: false` tier 3 is removed from truth at load (04) |
 
 ## Faith (hidden)
 
 `elect`, `regenerate`, `standing`, `holiness`, trial outcomes: see 07. Never rendered, never in a belief
 record, never in multiplayer sync beyond the owning player.
+
+## Constants
+
+Every named constant in this file and the others (thresholds, ranges, rates, ratios) lives in `rules.json`
+and can be overridden per scenario. A flag's derivation names the constant; it never embeds the number.
 
 ## Rule of thumb
 
