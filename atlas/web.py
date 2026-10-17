@@ -111,7 +111,29 @@ for f in load("lacounty/mol_mines.geojson"):
 mines += [("Camp Cactus, WWII Army Signal Corps camp (OSM point; five buildings reported standing)", -118.4676556, 33.3546122), ("Cactus Peak, WWII radar station J-41 site", -118.4464666, 33.3372513),
           ("Ben Weston WWII gun-emplacement bunkers, approximate: the promontory knoll between Cottonwood Cove and Ben Weston Beach (confirm on the Hiking Project spur)", -118.4819, 33.3709),
           ("Isthmus: 1864 Union barracks (Isthmus Yacht Club) and WWII Coast Guard training base", -118.4979, 33.4423), ("Toyon Bay: WWII OSS Maritime Unit camp (now CIMI)", -118.3545, 33.3746), ("Camp Emerald Bay: WWII Navy frogman training", -118.5318, 33.4692)]
+# official defense-site records replace the approximations above
+fuds = []
+for f in load("lacounty/fuds_1.geojson"):
+    if f["geometry"] and f["geometry"]["type"] == "Point":
+        nm = [v for k, v in f["properties"].items() if "NAME" in k.upper() and isinstance(v, str)]; lo, la = f["geometry"]["coordinates"]
+        fuds.append((f"{nm[0].title() if nm else 'FUDS site'} (USACE formerly used defense site record)", lo, la))
+mines = [m for m in mines if "WWII" not in m[0] and "Union barracks" not in m[0] and "OSS" not in m[0] and "frogman" not in m[0] and "radar" not in m[0]] + fuds
+mines.append(("structure at the road end on the Ben Weston promontory, seen on the 2023 county aerial (the bunkers spur starts at 33.37135 -118.47993)", -118.48051, 33.37133))
+import re as _re2
+for ln in open(os.path.join(DATA_DIR, "mines", "usmin_points.gml"), errors="replace").read().split("<gml:featureMember>")[1:] if os.path.exists(os.path.join(DATA_DIR, "mines", "usmin_points.gml")) else []:
+    pos = _re2.search(r"<gml:pos>([-\d\.]+) ([-\d\.]+)</gml:pos>", ln); typ = _re2.search(r"<(?:ms|usmin):ftr_type>([^<]*)<", ln); nm = _re2.search(r"<(?:ms|usmin):ftr_name>([^<]*)<", ln)
+    if pos: mines.append((f"{(nm.group(1) + ', ') if nm and nm.group(1) else ''}{typ.group(1) if typ else 'mine symbol'} (USGS USMIN, 1943 quad)", float(pos.group(2)), float(pos.group(1))))
 add_extra("mines", "mines, adits, quarries and WWII sites", "points", "#d6a3ff", [{"xy": conv([(lo, la)])[0], "props": {"what": n, "lat": round(la, 5), "lon": round(lo, 5)}} for n, lo, la in mines], on=True, radius=5, source="USGS MRDS, CA Mines Online, USGS 1950 7.5-minute quads")
+items = [{"xy": px_geom(f["geometry"]), "props": {"licensee": f["properties"].get("LICENSEE") or f["properties"].get("Licensee"), "type": f["properties"].get("STRUCTYPE") or f["properties"].get("Structure_Type"), "callsign": f["properties"].get("CALLSIGN") or f["properties"].get("Callsign")}} for f in load("lacounty/cell_towers.geojson") if f["geometry"]]
+add_extra("cell", "cell towers (FCC licenses via HIFLD; Black Jack; 72 h backup power required in this fire-threat tier)", "points", "#ffd23f", items, on=True, radius=4, source="HIFLD Cellular Towers, CPUC D.20-07-011")
+# boats and mooring buoys detected on the 2023 county aerial (atlas/out/boats_2023.geojson, from atlas/lariac/detect.py)
+b23 = os.path.join(OUT, "boats_2023.geojson")
+if os.path.exists(b23):
+    fts = json.load(open(b23))["features"]
+    items = [{"xy": px_geom(f["geometry"]), "props": {"length_m": f["properties"].get("length_m"), "width_m": f["properties"].get("width_m"), "cove": f["properties"].get("cove"), "image": "LA County LARIAC7 2023, 0.25 m"}} for f in fts if f["properties"].get("kind") == "boat"]
+    add_extra("boats2023", f"boats on the 2023 county aerial ({len(items)}: Isthmus 18, Avalon 111, Cat Harbor 50)", "points", "#ff8a5c", items, on=True, radius=3.2, source="LA County LARIAC7 2023 orthoimagery (WMTS), detector in atlas/lariac/detect.py")
+    items = [{"xy": px_geom(f["geometry"]), "props": {"what": "buoy-sized dot (mooring buoy or pickup float)", "cove": f["properties"].get("cove")}} for f in fts if f["properties"].get("kind") == "buoy"]
+    add_extra("buoys2023", f"mooring buoys on the 2023 county aerial ({len(items)} dots, about 2.5 per mooring)", "points", "#fff2a8", items, radius=1.6, source="LA County LARIAC7 2023 orthoimagery (WMTS), detector in atlas/lariac/detect.py")
 # harbor depth contours from NOAA's 1 m topobathy
 try:
     import glob, rasterio

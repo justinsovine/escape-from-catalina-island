@@ -4,6 +4,9 @@ A digest of four sourced research passes made on 2026-10-17, plus the atlas's ow
 sheets with every source URL and a confidence per line are in `atlas/research/`. Where sources disagree the
 range is given. Nothing here is invented; the invented parts of the game are listed separately in GAPS.md.
 
+Historic tsunamis measured here (NOAA NCEI): 1946 Aleutian 1.5 m at Catalina Harbor and 1.8 m at Avalon; 1960 Chile
+0.6 m at Avalon; 1964 Alaska 1.5 m; 1975 1.4 m at Isthmus and Avalon harbors; 2010 and 2011 noted at Two Harbors.
+
 ## Which cove takes which boat
 
 | cove | moorings | boat length | anchorage | shelter and notes |
@@ -65,7 +68,10 @@ trucks) can land on any beach and was tested as an evacuation vessel.
   ~25 ft elevation. Two Harbors pier: 12 ft at the end, fuel dock on the east side, ferries dock here. Cat Harbor:
   dinghy dock. USC Big Fisherman Cove: dock, pier, day and night helipad, hyperbaric chamber.
 - Avalon fuel dock (Dion and Sons, 2 Casino Way): diesel, mid-grade and 93 octane ethanol-free; four underground
-  tanks of unpublished size; 8:00 to 17:00 or 18:00. Two Harbors fuel dock: gas, diesel, water, 8:00 to 16:00
+  tanks registered with the state (EPA UST Finder, facility CA10271113): 4,000 + 4,000 + 3,000 gal of gasoline and
+  4,000 gal of diesel, 15,000 gal in all; 8:00 to 17:00 or 18:00. The Pebbly Beach gas station (44 to 56 Pebbly
+  Beach Rd, facility CA10271122) has one compartmented tank: 6,000 gal regular, 6,000 premium, 6,000 diesel.
+  Those are the island's only registered underground tanks; SCE's and Two Harbors' are above ground. Two Harbors fuel dock: gas, diesel, water, 8:00 to 16:00
   year-round. Road fuel: one self-serve station at 56 Pebbly Beach Rd (about $7 a gallon) and a Two Harbors
   station; propane from Chet's Hardware, Pebbly Beach Building Supply and the Two Harbors Parts and Supply
   Warehouse. The airport sells no fuel.
@@ -80,7 +86,12 @@ trucks) can land on any beach and was tested as an evacuation vessel.
   1958 to 1995), 23 propane microturbines (1.5 MW nameplate, about 1 MW usable, limited to 30% of load), a
   1 MW / 7.5 MWh sodium-sulfur battery. Average load 3.3 MW, peak 5.5 to 6 MW. Three 12 kV circuits (Hi Line,
   Interior, Wrigley) feed the whole island, Two Harbors included; there is no second plant.
-- Water (SCE): two reservoirs, 10 wells, 13 storage tanks, two desalination plants and over 45 miles of pipe for
+- Water (SCE, state system CA1910006, one system for Avalon and Two Harbors; the CPUC 2021 water quality report
+  gives 14 storage facilities: Thompson raw reservoir 343 million gal, Wrigley covered reservoir 9.45 million gal,
+  and 12 steel tanks totalling 2.22 million gal; source capacity 1,923 gpm; the state facility list names the
+  tanks: Airport, Baker 4 5 6, Blackjack, Howlands, Isthmus Twin 1 and 2, Million Gallon, Mt Ada, Toyon, two
+  desal tanks, White's Landing; and the wells: Cottonwood, Howlands Landing, Sweetwater Canyon, Middle Ranch 01A
+  05A 06A, Toyon Canyon, Whites Landing, Blackjack, two seawater wells at the quarry): two reservoirs, 10 wells, 13 storage tanks, two desalination plants and over 45 miles of pipe for
   about 2,000 accounts and 4,100 year-round people. Middle Ranch (Thompson) Reservoir holds 1,065 acre-feet
   (it fell to 127 in 2016). Avalon drinks three shallow wells in Middle Canyon plus desal: the two plants make up
   to 230,400 gal a day, about 40% of the town's water, into three tanks holding 375,000 gal. Avalon demand is
@@ -89,7 +100,9 @@ trucks) can land on any beach and was tested as an evacuation vessel.
   separate city system; some hydrants run saltwater. Every campground except Parsons has potable water.
 - Sewage: Avalon plant at Pebbly Beach, 1.2 million gal a day, ocean outfall; Two Harbors plant 0.25 mi south of
   Isthmus Cove, 57,000 gal a day, 270,000 gal holding pond, spray irrigation.
-- Communications: three cell sites (Mt Ada for Avalon, Blackjack, Isthmus) shared by the carriers; coverage
+- Communications: three cell sites (Mt Ada for Avalon, Blackjack, Isthmus) shared by the carriers (FCC cellular
+  licenses place AT&T and Verizon structures at Black Jack, 33.3867 -118.401); the interior is a Tier 3 high
+  fire-threat district, where CPUC decision D.20-07-011 requires 72 hours of backup power at wireless sites; coverage
   reaches 4 to 5 miles offshore; a 15-hour island-wide cell outage happened in February 2024. AT&T copper
   landlines stay up on central-office generators. The mainland link is microwave (a buried fiber is funded for
   2028). Cable internet in Avalon; satellite elsewhere.
@@ -99,7 +112,7 @@ trucks) can land on any beach and was tested as an evacuation vessel.
 
 - Residents: Avalon 3,460 (2020 census), 3,447 estimated for 2026; the island about 4,100 year-round. The 2020
   census blocks west of Avalon (Two Harbors, the camps and Middle Ranch) hold 192 people in 207 housing units, so
-  Two Harbors proper is nearer 150 than 300. Staff: Catalina Island Company about 300 (seasonal April to
+  Two Harbors proper is nearer 150 than 300 (the four blocks around the village hold 113). Staff: Catalina Island Company about 300 (seasonal April to
   October in dormitory housing), Conservancy over 100, Camp Emerald Bay 150 in summer only. Avalon K-12 has 443
   students; Two Harbors' one-room school closed in 2014.
 - Visitors: 1.21 million arrivals in 2025. October 2025: 98,686 arrivals, 55% by ferry (2,308 of them at Two
@@ -164,6 +177,9 @@ and Black Jack Volunteer Camp (4 canvas tents of 8 beds, kitchen, showers).
 - Aircraft: Airport in the Sky, 3,000 by 75 ft concrete (rebuilt by Marines 2019), 1,602 ft elevation, open
   08:00 to 17:00, no night operations, 12,500 lb limit, 6 to 10 based aircraft, no fuel; DC-3 freight flights from
   Long Beach; Maverick (ex IEX) helicopters Long Beach to Pebbly Beach in 13 to 15 min, charters to Two Harbors.
+- Two Harbors village on the 2023 county aerial (LARIAC7, winter weekday, counted by eye at 0.125 m): about 31
+  vehicles (12 in the dirt lot by the ballfield, 14 in the service yard behind the village with a yellow boom
+  crane, 5 around the village core), 6 boats on trailers, the water tank on the hill west of the village.
 
 ## Military, bunkers, mines, caves, hard buildings
 
@@ -171,10 +187,13 @@ and Black Jack Volunteer Camp (4 canvas tents of 8 beds, kitchen, showers).
   Guard training base at Two Harbors (1,594 acres, ~75 temporary buildings, underground boiler-fuel tanks whose
   fill pipes are still visible); OSS camps at Toyon Bay, Cherry Valley, Gallagher's, White's, Howlands and Emerald
   Bay (189 acres; concrete tanks under the Toyon basketball court); Navy frogmen at Emerald Bay; Camp Cactus
-  (Army Signal Corps, 3.5 acres for 500 men, radar station J-41 on Cactus Peak at 1,560 ft, five buildings
-  still standing on Conservancy land, concrete floors only in the latrine and motor pool); the airport as an Army
+  (Army Signal Corps, 3.5 acres for 500 men, five buildings still standing on Conservancy land, concrete floors
+  only in the latrine and motor pool; the Army Corps' formerly-used-defense-site record puts Camp Cactus at
+  33.3508 -118.4578 and Radar Site J-41 at 33.3667 -118.4806, which is the Ben Weston promontory, with a second
+  site "Mount Orizaba 1K2" at 33.3417 -118.4181); the airport as an Army
   Air Forces base. Two large underground concrete gun-emplacement bunkers survive on the promontory between
-  Cottonwood Cove and Ben Weston Beach (a steep "Ben Weston Bunkers Spur" trail reaches them). No Cold War
+  Cottonwood Cove and Ben Weston Beach (the "Ben Weston Bunkers Spur" starts at 33.37135 -118.47993; the 2023
+  county aerial shows a small concrete structure at the road end on the promontory at about 33.3710 -118.4806). No Cold War
   installation and no road tunnel exist; the "cave" below Holly Hill House is an 1890s tunnel stub.
 - Mines (USGS records, confirmed on the 1950 topographic quads which print the shaft and adit symbols): Black Jack
   Mine shaft at 33.3892 -118.4026 on the NE slope of Black Jack Mountain (USGS record point 33.38532 -118.40617), a 535 ft

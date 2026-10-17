@@ -1,5 +1,5 @@
 """Fetch every outside dataset the atlas uses beyond OSM and the DEMs, from sources verified reachable on
-2026-10-17. Each function is idempotent (skips files that exist) and writes under data/. Run: python atlas/sources.py [all|conservancy|lacounty|assessor|census|inat|winds|mines|topo|topobathy|landcover|moorings]"""
+2026-10-17. Each function is idempotent (skips files that exist) and writes under data/. Run: python atlas/sources.py [all|conservancy|lacounty|assessor|census|inat|winds|mines|topo|topobathy|landcover|moorings|defense|tanks|cell|runups|usmin|aerial]"""
 import os, sys, json, time, urllib.request, urllib.parse
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE); sys.path.insert(0, ROOT)
 from mapgame import DATA
@@ -118,8 +118,64 @@ def moorings():
         out = os.path.join(folder, name)
         if not os.path.exists(out): _get(url, out); print(out)
 
+def defense():
+    """USACE Formerly Used Defense Sites: property points (layer 1), projects (2), munitions response sites (3), property polygons (4)."""
+    for lyr in (1, 2, 3, 4):
+        arcgis_layer(f"https://services7.arcgis.com/n1YM8pTrFmm7L4hs/arcgis/rest/services/fuds/FeatureServer/{lyr}", os.path.join(DATA, "lacounty", f"fuds_{lyr}.geojson"), bbox=ISLAND)
+
+def tanks():
+    """EPA UST Finder: underground fuel tanks (table 4) at every registered facility on the island (layer 0)."""
+    out = os.path.join(DATA, "lacounty", "ust_tanks.json")
+    if os.path.exists(out): return
+    base = "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/UST_Finder_Feature_Layer_2/FeatureServer/"
+    fac = arcgis_layer(base + "0", os.path.join(DATA, "lacounty", "ust_facilities.geojson"), bbox=ISLAND)
+    ids = sorted({f["properties"].get("Facility_ID") for f in json.load(open(fac))["features"] if f["properties"].get("Facility_ID")})
+    rows = []
+    if ids:
+        d = get(base + "4/query?" + urllib.parse.urlencode(dict(where="Facility_ID IN (%s)" % ",".join("'%s'" % i for i in ids), outFields="*", f="json")))
+        rows = [f["attributes"] for f in d.get("features", [])]
+    json.dump(rows, open(out, "w")); print(out, len(rows))
+
+def cell():
+    """HIFLD cellular towers (FCC cellular licenses with structure coordinates)."""
+    arcgis_layer("https://services2.arcgis.com/PYn6bWCjT6bhw1z3/arcgis/rest/services/HIFLD_Cellular_Tower/FeatureServer/0", os.path.join(DATA, "lacounty", "cell_towers.geojson"), bbox=ISLAND)
+
+def runups():
+    """NOAA NCEI tsunami run-up records naming Catalina (the API has no place filter, so page through the USA set)."""
+    out = os.path.join(DATA, "lacounty", "ncei_runups_catalina.json")
+    if os.path.exists(out): return
+    keep, page = [], 1
+    while True:
+        d = get(f"https://www.ngdc.noaa.gov/hazel/hazard-service/api/v1/tsunamis/runups?country=USA&itemsPerPage=200&page={page}")
+        items = d.get("items", []) if isinstance(d, dict) else d
+        keep += [r for r in items if "CATALINA" in (r.get("locationName") or "").upper()]
+        if not items or (isinstance(d, dict) and page >= int(d.get("totalPages", page))): break
+        page += 1; time.sleep(0.2)
+    os.makedirs(os.path.dirname(out), exist_ok=True); json.dump(keep, open(out, "w")); print(out, len(keep))
+
+def usmin():
+    """USGS USMIN mine symbols digitized from the historical topographic maps (WFS, GML)."""
+    out = os.path.join(DATA, "mines", "usmin_points.gml"); os.makedirs(os.path.dirname(out), exist_ok=True)
+    if os.path.exists(out): return
+    _get("https://mrdata.usgs.gov/wfs/usmin?request=GetFeature&service=WFS&version=1.1.0&typeName=points&bbox=%s,%s,%s,%s,EPSG:4326" % (ISLAND[1], ISLAND[0], ISLAND[3], ISLAND[2]), out); print(out)
+
+AERIAL = {"isthmus": (19, (-118.5081, 33.4383, -118.4814, 33.4521)), "avalon": (19, (-118.3351, 33.338, -118.3159, 33.3529)), "catharbor": (19, (-118.5198, 33.42, -118.5006, 33.4372)), "twoharbors_village": (20, (-118.5013, 33.4397, -118.4937, 33.4452)), "benweston": (20, (-118.4831, 33.369, -118.4779, 33.3733))}  # zoom and lon/lat bbox of each mosaic
+def aerial(names=None):
+    """LA County LARIAC7 2023 4-inch orthoimagery stitched from the public WMTS tiles into Web Mercator mosaics over the harbors
+    (hundreds of tiles each; cached under data/lariac/cache), then atlas/lariac/detect.py counts boats and mooring buoys on them."""
+    import subprocess
+    sys.path.insert(0, os.path.join(HERE, "lariac")); from tiles import stitch
+    out = os.path.join(DATA, "lariac"); os.makedirs(out, exist_ok=True); todo = []
+    for name, (z, bbox) in AERIAL.items():
+        if names and name not in names: continue
+        if not os.path.exists(os.path.join(out, f"{name}_z{z}.png")): stitch(name, bbox, z, out)
+        if name in ("isthmus", "avalon", "catharbor"): todo.append(name)
+    if todo and not all(os.path.exists(os.path.join(out, f"detect_{n}.json")) for n in todo):
+        subprocess.run([sys.executable, "-I", os.path.join(HERE, "lariac", "detect.py"), *todo], check=True)
+
 if __name__ == "__main__":
     which = sys.argv[1] if len(sys.argv) > 1 else "all"
-    steps = dict(conservancy=conservancy, lacounty=lacounty, assessor=assessor, census=census, inat=inat, winds=winds, mines=lacounty, topo=topo, topobathy=topobathy, landcover=landcover, moorings=moorings)
+    steps = dict(conservancy=conservancy, lacounty=lacounty, assessor=assessor, census=census, inat=inat, winds=winds, mines=lacounty, topo=topo, topobathy=topobathy, landcover=landcover, moorings=moorings,
+                 defense=defense, tanks=tanks, cell=cell, runups=runups, usmin=usmin, aerial=aerial)
     for k, f in steps.items():
         if which in ("all", k): f()

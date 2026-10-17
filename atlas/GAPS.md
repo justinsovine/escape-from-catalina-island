@@ -16,7 +16,7 @@ it from the partial data. "Get" items marked (reachable) can be fetched from thi
   both are public PDFs (reachable, need a visual read). Invent: assign sizes by row, smallest inshore, using
   Avalon's row rule for every cove.
 - **Boats present on the day.** Have: hull detections with lengths on 11 May 2022 aerial imagery for calm water
-  (Boats tab), monthly occupancy statistics (Avalon ~170 boats a night in October), fleet lists. Missing: the
+  and on the winter 2023 county aerial (Isthmus 18, Avalon 111, Cat Harbor 50 boats; 1,562 mooring-buoy dots, Boats tab), monthly occupancy statistics (Avalon ~170 boats a night in October), fleet lists. Missing: the
   October mix per cove, boats anchored off. Get: Sentinel-2 10 m images from any October (reachable) show hulls
   over about 15 m; the Two Harbors harbor department could give October counts. Invent: draw N boats per cove
   from the October occupancy (Avalon 170, Isthmus Cove 60, Cat Harbor 25, Cherry and Fourth of July 20, Emerald
@@ -50,10 +50,9 @@ it from the partial data. "Get" items marked (reachable) can be fetched from thi
 
 ## Water, food, fuel
 
-- **Tank volumes.** Have: 13 SCE tanks mapped as 26 storage tanks and 10 covered reservoirs in OSM; the three
-  desal tanks total 375,000 gal; the Million Gallon Tank name. Missing: each tank's volume and what it holds.
-  Get: SCE's Catalina water fact sheet and CPUC filings list tank sizes (reachable PDFs). Invent: volume from
-  footprint times 6 m height; tanks above towns hold water, tanks at Pebbly Beach hold fuel.
+- **Tank volumes.** Now known in total from the CPUC water quality report: Thompson 343 million gal raw, Wrigley
+  9.45 million gal covered, 12 steel tanks totalling 2.22 million gal, with the tank and well names from the state
+  facility list. Still missing: the volume of each named tank. Invent: split the 2.22 million gal by footprint.
 - **Wells and whether Two Harbors has its own.** Have: 10 wells, Avalon's three in Middle Canyon, the pipeline to
   the west end. Missing: well locations. Invent: wells along Middle Canyon and at Cottonwood; Two Harbors depends
   on the pipeline and the Million Gallon Tank (about 3 days of village use).
@@ -61,9 +60,9 @@ it from the partial data. "Get" items marked (reachable) can be fetched from thi
   over 20 restaurants, the barge Monday to Friday, 4 to 5 grocery trailers up to three times a week. Missing:
   inventory. Invent: Vons holds 3 to 5 days for the resident population, the General Store 1 to 2 days for Two
   Harbors, restaurants a day each; cruise ships carry weeks.
-- **Fuel stock outside SCE.** Have: SCE's tanks and reserve, the fuel docks' grades. Missing: the Avalon fuel
-  dock's four underground tanks and the gas stations' tanks. Invent: 4 by 10,000 gal at the fuel dock, 2 by
-  10,000 at Pebbly Beach, 2,000 gal at Two Harbors.
+- **Fuel stock outside SCE.** Now known from the state tank registry: the Avalon fuel dock holds 15,000 gal in
+  four tanks (11,000 gasoline, 4,000 diesel) and the Pebbly Beach station 18,000 gal (6,000 each of regular,
+  premium, diesel). Still missing: Two Harbors' above-ground tanks. Invent: 2,000 gal at Two Harbors.
 
 ## Fallout and weather
 
@@ -87,7 +86,8 @@ it from the partial data. "Get" items marked (reachable) can be fetched from thi
 ## Vehicles
 
 - Have: category counts and the 800 to 860 full-size figure for Avalon, transit and tour fleets, fire apparatus
-  from fan rosters. Missing: Two Harbors vehicles, Conservancy and SCE fleet sizes, the Sheriff's boats, quarry
+  from fan rosters, about 31 vehicles and 6 trailered boats in the Two Harbors village on the 2023 county aerial.
+  Missing: Conservancy and SCE fleet sizes, the Sheriff's boats, quarry
   equipment today. Invent: Two Harbors 15 pickups and 10 carts; Conservancy 25 trucks; SCE 15; quarry 2 loaders,
   2 haul trucks, 1 drill rig; Middle Ranch 5 trucks and a backhoe.
 
