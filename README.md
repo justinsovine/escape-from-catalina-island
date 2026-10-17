@@ -87,3 +87,21 @@ line says, what high ground has water and buildings, and how far the boats would
 `scenario/README.md` for the numbers and `scenario/numbers.py` / `scenario/flood_map.py` to recompute them.
 
 ![isthmus](examples/isthmus_flood.png)
+
+## The island atlas
+
+`atlas/` maps the whole island for the game: 316 road segments, 465 trail and track segments, 1,910 buildings,
+every food, store, water, camp, medical, emergency, pier, infrastructure and shelter feature OpenStreetMap knows,
+each with its height, distance to the coast, whether the state's tsunami hazard area or a 10.5 m or 20 m run-up
+reaches it, and a fallout note (open water, covered tank, solid or light building). Boats are counted on USDA
+aerial imagery. Four research passes add the sourced facts a map cannot hold: moorings by cove and boat length,
+people on an October day, utilities and fuel, vehicles, bunkers and mines, wildlife numbers.
+
+- `python atlas/build.py` writes `atlas/out/features.csv`, GeoJSON layers and `summary.md`
+- `python atlas/boats.py` counts hulls per cove from NAIP imagery (Planetary Computer)
+- `python atlas/map.py all` renders the island sheet and the Avalon and Two Harbors sheets from 1 m lidar
+- `python atlas/web.py` builds the interactive page (`atlas/out/web/index.html`)
+- `atlas/FACTS.md` is the sourced digest, `atlas/GAPS.md` lists what could not be found and how to get or invent
+  it, `atlas/research/` holds the raw sheets with every URL
+
+![island atlas](examples/atlas_island.png)

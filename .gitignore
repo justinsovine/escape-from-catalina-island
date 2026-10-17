@@ -3,3 +3,5 @@ out/
 __pycache__/
 *.pyc
 .DS_Store
+atlas/out/*.png
+atlas/out/web/
