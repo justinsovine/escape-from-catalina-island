@@ -23,7 +23,8 @@ Any place, by bbox and the trail's name in OSM:
     python render.py wire any out/rrg.png --bbox -83.74 37.74 -83.58 37.86 --trail "Sheltowee" --title "RED RIVER GORGE"
 
 Options: `--zoom 14` for about 10 m terrain (13 is about 19 m), `--dem file.tif` to use a local GeoTIFF such as a
-USGS 3DEP tile instead of tiles, `--step-ft 250` for thicker slabs, `--res` for the grid size in metres.
+USGS 3DEP tile instead of tiles, `--step-ft 250` for thicker slabs, `--res` for the grid size in metres,
+`--focus LON LAT RADIUS_M` to put one leg of the trail on the wire card instead of the whole bbox.
 Downloads are cached under `data/` (or `$MAPGAME_DATA`). Named scenes with labels and pins live in `mapgame/scenes.py`.
 
 ## How it works
@@ -41,6 +42,14 @@ Downloads are cached under `data/` (or `$MAPGAME_DATA`). Named scenes with label
 - `mapgame/styles/crt_map.py` draws one elevation cell per pixel at low resolution, hatches the upper part of
   the local relief with carets, places tree glyphs on forest polygons (or along streams), dots the trails, labels in
   Press Start 2P, then dithers the sea, adds scanlines, barrel distortion, bloom and a frame.
+
+## Readability rules the styles follow
+
+One hero per image: the route is the only bright line, everything else is one quiet grey. Terrain reads by value
+(slab tops lighten with height; the wire body is filled so nothing shows through a ridge), not by outline. Lines
+have a hierarchy: index contours every fourth, the rest faint. Hatching marks only the upper third of the local
+relief, on slopes, thinned to a checkerboard, so white space does the work. Labels and pins are capped, never
+overlap, and the highest named summits win. A dissected plateau needs a focus disc, not a whole region.
 
 ## Data
 

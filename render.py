@@ -23,6 +23,7 @@ p.add_argument("--zoom", type=int, default=13, help="Terrarium zoom: 13 is about
 p.add_argument("--res", type=float, help="grid metres; defaults per style (iso 20, crt 36, wire 10)")
 p.add_argument("--dem", help="local GeoTIFF to use instead of terrain tiles")
 p.add_argument("--step-ft", type=float, help="iso: feet per slab")
+p.add_argument("--focus", nargs=3, type=float, metavar=("LON", "LAT", "RADIUS_M"), help="wire: show one leg, a disc around this point")
 a = p.parse_args()
 
 res = a.res or {"iso": 20.0, "crt": 36.0, "wire": 10.0}[a.style]
@@ -36,6 +37,7 @@ else:
     if a.dem: cfg["geotiff"] = a.dem
     S = scenes.build(res=res, **cfg)
 if a.step_ft: S["step_ft"] = a.step_ft; S["slab_m"] = a.step_ft * 0.7
+if a.focus: S["focus"] = (*S["area"].xy(a.focus[0], a.focus[1]), a.focus[2])
 os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
 STYLES[a.style](S, a.out)
 print("wrote", a.out)

@@ -20,7 +20,7 @@ SCENES = {
                     ports=[(-118.4979, 33.4423, "TWO HARBORS")], camps=[(-118.4708, 33.3861, "LITTLE HARBOR")]),
     "sheltowee": dict(bbox=(-83.74, 37.74, -83.58, 37.86), trail=r"Sheltowee Trace", title="SHELTOWEE TRACE · RED RIVER GORGE", zoom=13,
                       step_ft=150, slab_m=110, sea_ft=-1000, tree_ft=99999,
-                      card_title="Sheltowee Trace · Red River Gorge", card_sub="Daniel Boone National Forest, Kentucky"),
+                      focus=(-83.655, 37.795, 2600), card_title="Sheltowee Trace · Red River Gorge", card_sub="Daniel Boone National Forest, Kentucky"),
 }
 
 
@@ -42,6 +42,7 @@ def build(bbox, trail=None, title="", res=10.0, zoom=13, geotiff=None, **kw):
         S[k] = [(*A.xy(lon, lat), name) for lon, lat, name in S[k]]
     S["crt_labels"] = [(*A.xy(lon, lat), name, sym) for lon, lat, name, sym in S["crt_labels"]]
     S["pins"] = [(*A.xy(lon, lat), *rest) for lon, lat, *rest in S["pins"]]
+    if S.get("focus"): S["focus"] = (*A.xy(S["focus"][0], S["focus"][1]), S["focus"][2])
     return S
 
 

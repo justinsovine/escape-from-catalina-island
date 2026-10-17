@@ -50,7 +50,8 @@ def layers(area, elements):
     """Shapely geometries in the area's CRS, grouped by what the styles draw."""
     nodes = {e["id"]: (e["lon"], e["lat"]) for e in elements if e["type"] == "node"}
     ways = {e["id"]: e for e in elements if e["type"] == "way"}
-    out = dict(buildings=[], streams=[], roads=[], trails=[], coast=[], water=[], wood=[], piers=[], peaks=[], camps=[], places=[], springs=[])
+    out = dict(buildings=[], streams=[], roads=[], service=[], trails=[], coast=[], water=[], wood=[], piers=[], peaks=[], camps=[], places=[], springs=[])
+    RANK = {"city": 0, "town": 1, "village": 2, "hamlet": 3, "locality": 4, "neighbourhood": 5, "isolated_dwelling": 6, "farm": 7}
     def ring(w):
         pts = [area.xy(*nodes[n]) for n in w["nodes"] if n in nodes]
         return Polygon(pts) if len(pts) >= 4 and pts[0] == pts[-1] else None
@@ -67,6 +68,7 @@ def layers(area, elements):
             elif t.get("natural") == "water" and closed: out["water"].append(Polygon(pts))
             elif (t.get("natural") == "wood" or t.get("landuse") == "forest") and closed: out["wood"].append(Polygon(pts))
             elif t.get("highway") in ("path", "footway", "track", "bridleway"): out["trails"].append(LineString(pts))
+            elif t.get("highway") in ("service", "driveway", "parking_aisle"): out["service"].append(LineString(pts))
             elif "highway" in t: out["roads"].append(LineString(pts))
         elif e["type"] == "relation" and t.get("type") == "multipolygon" and (t.get("natural") == "wood" or t.get("landuse") == "forest"):
             for m in e.get("members", []):      # outer rings only; good enough for tree placement
@@ -78,7 +80,9 @@ def layers(area, elements):
             if t.get("natural") == "peak": out["peaks"].append(p)
             elif t.get("tourism") in ("camp_site", "alpine_hut", "wilderness_hut") or t.get("amenity") == "shelter": out["camps"].append(p)
             elif t.get("natural") == "spring" or t.get("amenity") == "drinking_water" or t.get("man_made") == "water_tap": out["springs"].append(p)
-            elif "place" in t and t.get("name"): out["places"].append(p)
+            elif "place" in t and t.get("name") and not re.search(r"post office", t["name"], re.I):
+                out["places"].append((RANK.get(t["place"], 9), p))
+    out["places"] = [p for _, p in sorted(out["places"], key=lambda r: r[0])]   # biggest places first
     return out
 
 
