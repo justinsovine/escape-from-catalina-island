@@ -105,3 +105,10 @@ people on an October day, utilities and fuel, vehicles, bunkers and mines, wildl
   it, `atlas/research/` holds the raw sheets with every URL
 
 ![island atlas](examples/atlas_island.png)
+
+## The representation spec
+
+`design/` says how all of the above becomes engine-agnostic game data: truth, state, knowledge and view layers,
+the catalogue of flags and when each is computed, knowledge and memory with map items, time and the scripted
+chain, people and the sea, the data pack. `atlas/bake.py` produces the flood threshold raster and the cost classes
+the spec is built on. Start at `design/README.md`.
