@@ -97,8 +97,9 @@ trucks) can land on any beach and was tested as an evacuation vessel.
 
 ## People
 
-- Residents: Avalon 3,460 (2020 census), 3,447 estimated for 2026; the island about 4,100 year-round; Two
-  Harbors 150 to 300 depending on the source. Staff: Catalina Island Company about 300 (seasonal April to
+- Residents: Avalon 3,460 (2020 census), 3,447 estimated for 2026; the island about 4,100 year-round. The 2020
+  census blocks west of Avalon (Two Harbors, the camps and Middle Ranch) hold 192 people in 207 housing units, so
+  Two Harbors proper is nearer 150 than 300. Staff: Catalina Island Company about 300 (seasonal April to
   October in dormitory housing), Conservancy over 100, Camp Emerald Bay 150 in summer only. Avalon K-12 has 443
   students; Two Harbors' one-room school closed in 2014.
 - Visitors: 1.21 million arrivals in 2025. October 2025: 98,686 arrivals, 55% by ferry (2,308 of them at Two
@@ -175,9 +176,12 @@ and Black Jack Volunteer Camp (4 canvas tents of 8 beds, kitchen, showers).
   Air Forces base. Two large underground concrete gun-emplacement bunkers survive on the promontory between
   Cottonwood Cove and Ben Weston Beach (a steep "Ben Weston Bunkers Spur" trail reaches them). No Cold War
   installation and no road tunnel exist; the "cave" below Holly Hill House is an 1890s tunnel stub.
-- Mines (USGS records): Black Jack Mine on the NE slope of Black Jack Mountain, 33.38532 -118.40617, a 535 ft
+- Mines (USGS records, confirmed on the 1950 topographic quads which print the shaft and adit symbols): Black Jack
+  Mine shaft at 33.3892 -118.4026 on the NE slope of Black Jack Mountain (USGS record point 33.38532 -118.40617), a 535 ft
   shaft with levels at 100 to 500 ft and 1,524 m of workings, lead-zinc-silver, worked 1923 to 1927, reported
-  sealed and flooded; Renton Mine 2 miles SE of Avalon, 33.32421 -118.30922, five adits and 732 m of workings;
+  sealed and flooded; Renton Mine 2 miles SE of Avalon (1950 quad: the mine at 33.3236 -118.3141 with an upper adit at 33.3245 -118.3141, a
+  prospect at 33.3275 -118.3152, an adit by the Pebbly Beach road at 33.3298 -118.3091 and workings at Jewfish Point
+  33.3197 -118.3044), five adits and 732 m of workings;
   a Cherry Valley silver mine with a 142 ft drift at 33.45003 -118.51257; 1860s shafts in Fourth of July and Cherry
   valleys; Silver Canyon tunnels; Tongva soapstone quarries by the airport, Empire Landing and Potts Valley.
   Rock quarries at Pebbly Beach (active) and Empire Landing (active since 1949).
@@ -189,6 +193,12 @@ and Black Jack Volunteer Camp (4 canvas tents of 8 beds, kitchen, showers).
   hangar, the Conservancy's Middle Ranch (offices, nursery, field lab, bunkhouse), El Rancho Escondido (16-stall
   stable, main house, bunkhouse, chapel), Camp Emerald Bay (tents for 450, 20 cabins of 8, dining hall), CIMI's
   1928 school quadrangles at Toyon Bay, USC's 30,000 sq ft lab with dorms and dining hall.
+
+## Wind at the airport (2015 to 2025 hourly observations)
+
+October winds blow from the west 32% of hours, southwest 14%, northwest 13%, east 8%, north 7%, northeast 6%,
+calm 11%. A northeast wind of 10 kt or more (the Santa Ana signature that would carry a Los Angeles plume to the
+island) occurred on 31 of 301 October days, about one day in ten.
 
 ## Animals and ecology
 

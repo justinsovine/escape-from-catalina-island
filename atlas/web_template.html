@@ -74,19 +74,21 @@ footer { padding-block:6px; padding-left:max(16px, env(safe-area-inset-left, 0px
 <main>
   <div id="map" role="application" aria-label="Map of Santa Catalina Island"></div>
   <aside>
-    <div class="tabs"><button data-tab="layers" aria-pressed="true">Layers</button><button data-tab="search" aria-pressed="false">Search</button><button data-tab="facts" aria-pressed="false">Facts</button><button data-tab="gaps" aria-pressed="false">Gaps</button><button data-tab="boats" aria-pressed="false">Boats</button></div>
+    <div class="tabs"><button data-tab="layers" aria-pressed="true">Layers</button><button data-tab="search" aria-pressed="false">Search</button><button data-tab="facts" aria-pressed="false">Facts</button><button data-tab="gaps" aria-pressed="false">Gaps</button><button data-tab="boats" aria-pressed="false">Boats</button><button data-tab="sources" aria-pressed="false">Sources</button></div>
     <section class="panel on" id="p-layers">
       <h2>Flags</h2>
       <label class="row"><input type="checkbox" id="fHaz"> only things in the state tsunami hazard zone</label>
       <label class="row"><input type="checkbox" id="fClear"> only things clear of both run-up bands</label>
       <h2>Points</h2><div id="kinds"></div>
       <h2>Lines and areas</h2><div id="lines"></div>
+      <h2>More data</h2><div id="extras"></div>
       <h2>Count in view</h2><div id="stats"></div>
     </section>
     <section class="panel" id="p-search"><input type="search" id="q" placeholder="name, type, town… (e.g. water, Vons, Black Jack)" aria-label="search"><ul class="hits" id="hits"></ul></section>
     <section class="panel md" id="p-facts"></section>
     <section class="panel md" id="p-gaps"></section>
     <section class="panel md" id="p-boats"></section>
+    <section class="panel md" id="p-sources"></section>
   </aside>
 </main>
 <footer>USGS 3DEP 10 m and 1 m lidar · OpenStreetMap (ODbL) · California Geological Survey tsunami hazard area · USDA NAIP 2022 imagery for the boats · run-up bands are elevation, not a wave model</footer>
@@ -174,6 +176,24 @@ for (const k in LINES) if (lineGroups[k]) {
   if (on) lineGroups[k].addTo(map);
   document.getElementById(id).addEventListener("change", e => { e.target.checked ? lineGroups[k].addTo(map) : map.removeLayer(lineGroups[k]); });
 }
+// extra layers from outside sources
+const extrasDiv = document.getElementById("extras");
+for (const ex of (D.extra || [])) {
+  const g = L.layerGroup();
+  for (const it of ex.items) {
+    let m;
+    if (ex.kind === "points") m = L.circleMarker(yx(it.xy), { renderer:canvas, radius:ex.radius || 3, color:"#0a1118", weight:0.6, fillColor:ex.color, fillOpacity:0.9 });
+    else if (ex.kind === "lines") m = L.polyline(it.p.map(part => part.map(yx)), { renderer:canvas, color:ex.color, weight:ex.weight || 1.2, opacity:0.9, dashArray:ex.dash || null });
+    else m = L.polygon(it.p.map(r => r.map(yx)), { renderer:canvas, color:ex.color, weight:ex.weight || 0.8, fillColor:ex.color, fillOpacity:ex.fill });
+    const txt = Object.entries(it.props || {}).filter(([k, v]) => v !== null && v !== undefined && v !== "").map(([k, v]) => `<span class="k">${esc(k)}</span> ${esc(String(v))}`).join("<br>");
+    if (txt) m.bindPopup(`<b>${esc(ex.name)}</b><br>${txt}${ex.source ? `<br><span class="k">source: ${esc(ex.source)}</span>` : ""}`);
+    g.addLayer(m);
+  }
+  lineGroups["x_" + ex.id] = g; const id = "x_" + ex.id;
+  extrasDiv.insertAdjacentHTML("beforeend", `<label class="row"><input type="checkbox" id="${id}" ${ex.on ? "checked" : ""}><span class="sw ${ex.kind === "points" ? "" : (ex.kind === "lines" ? "ln" : "sq")}" style="background:${ex.color}"></span>${esc(ex.name)} <small style="color:var(--muted)">(${ex.items.length})</small></label>`);
+  if (ex.on) g.addTo(map);
+  document.getElementById(id).addEventListener("change", e => { e.target.checked ? g.addTo(map) : map.removeLayer(g); });
+}
 function applyFilters() {
   const haz = document.getElementById("fHaz").checked, clr = document.getElementById("fClear").checked;
   for (const m of markers) {
@@ -220,6 +240,7 @@ function md(s) {
 document.getElementById("p-facts").innerHTML = T.facts ? md(T.facts) : "<p>Research facts are being compiled.</p>";
 document.getElementById("p-gaps").innerHTML = T.gaps ? md(T.gaps) : "<p>The gap list is being compiled.</p>";
 document.getElementById("p-boats").innerHTML = T.boats ? md(T.boats) : "<p>Boat counts pending.</p>";
+document.getElementById("p-sources").innerHTML = T.sources ? md(T.sources) : "<p>Source catalog pending.</p>";
 })();
 </script>
 </body>

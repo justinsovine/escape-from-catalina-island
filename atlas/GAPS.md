@@ -1,5 +1,9 @@
 # What is missing, how much we have, how to get it, and how to invent it last
 
+Update 2026-10-17: SOURCES.md lists a located source for every item below with its access status; the items marked
+fetched there are now in `data/` and on the map (mooring maps, building heights, assessor hotels, census blocks,
+wildlife sightings, mines from the 1950 quads, harbor depths, Conservancy layers, airport winds).
+
 Each line: what the game wants; what we actually have; how to get the real thing; the last-resort rule for inventing
 it from the partial data. "Get" items marked (reachable) can be fetched from this environment; others need you.
 
