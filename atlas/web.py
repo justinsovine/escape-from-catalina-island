@@ -108,7 +108,10 @@ mines = [("Black Jack Mine, shaft (1950 quad symbol; USGS ore body)", -118.40259
          ("Santa Catalina copper-silver mine, Cherry Valley (USGS MRDS)", -118.51257, 33.45003), ("Empire Landing Quarry (USGS MRDS, Connolly-Pacific)", -118.4659, 33.43973), ("Empire Quarry, Graham Bros (USGS MRDS)", -118.4737, 33.43033), ("moonstone diggings (USGS MRDS)", -118.36729, 33.38834)]
 for f in load("lacounty/mol_mines.geojson"):
     if f["geometry"]: mines.append((f["properties"].get("MineName", "quarry") + " (state Mines Online, active)", *f["geometry"]["coordinates"]))
-add_extra("mines", "mines, adits and quarries", "points", "#d6a3ff", [{"xy": conv([(lo, la)])[0], "props": {"what": n, "lat": round(la, 5), "lon": round(lo, 5)}} for n, lo, la in mines], on=True, radius=5, source="USGS MRDS, CA Mines Online, USGS 1950 7.5-minute quads")
+mines += [("Camp Cactus, WWII Army Signal Corps camp (OSM point; five buildings reported standing)", -118.4676556, 33.3546122), ("Cactus Peak, WWII radar station J-41 site", -118.4464666, 33.3372513),
+          ("Ben Weston WWII gun-emplacement bunkers, approximate: the promontory knoll between Cottonwood Cove and Ben Weston Beach (confirm on the Hiking Project spur)", -118.4819, 33.3709),
+          ("Isthmus: 1864 Union barracks (Isthmus Yacht Club) and WWII Coast Guard training base", -118.4979, 33.4423), ("Toyon Bay: WWII OSS Maritime Unit camp (now CIMI)", -118.3545, 33.3746), ("Camp Emerald Bay: WWII Navy frogman training", -118.5318, 33.4692)]
+add_extra("mines", "mines, adits, quarries and WWII sites", "points", "#d6a3ff", [{"xy": conv([(lo, la)])[0], "props": {"what": n, "lat": round(la, 5), "lon": round(lo, 5)}} for n, lo, la in mines], on=True, radius=5, source="USGS MRDS, CA Mines Online, USGS 1950 7.5-minute quads")
 # harbor depth contours from NOAA's 1 m topobathy
 try:
     import glob, rasterio
